@@ -1,16 +1,51 @@
+alert("slider range will allow you to determine password length")
+
+
+
+//random password
 function generate(){
-var values = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()";
 
-var values3 = "";
+    //set password length
+    let complexity = document.getElementById("slider").value;
 
+    //possible values for password
+    let values = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+";
+
+    let password = "";
+
+    //for loop to choose password characters
+    for(var i = 0; i <= complexity; i ++){
+        password = password + values.charAt(Math.floor(Math.random() * Math.floor(values.length -1)));
+    }
+
+
+    //add password to display area
+    document.getElementById("display").value = password;
+
+    //add password to previously generated passwords section
+    document.getElementById("lastPasswords").innerHTML += password + "<br />";
 
 }
 
-for (var i = 0; i<= i; i++) {
-password = values3 + values.charAt(math.floor(math.random()*math.floor(values.length -1)));
+// set default length display of 25
+document.getElementById("length").innerHTML = "length: 25";
+
+//function to set length based on slider position
+document.getElementById("slider").oninput= function(){
+
+        if(document.getElementById("slider").value > 0){
+            document.getElementById("length").innerHTML = "length: " + document.getElementById("slider").value;
+        }
+        else{
+            document.getElementById("length").innerHTML = "length: 1";
+        }
 }
-document.getElementById("display").values = password;
 
-document.getElementById ("length").innerHTML += 
+//function to copy password to clipboard
+function copyPassword(){
+        document.getElementById("display").select();
 
-console.log(values3);
+        document.execCommand("Copy");
+
+        alert("Password copied to clipboard");
+}
